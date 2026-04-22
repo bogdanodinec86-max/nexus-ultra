@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Nexus Ultra | Private Fintech</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="preloader" aria-hidden="true">
+        <div class="preloader-shell">
+            <div class="preloader-line"></div>
+            <div class="preloader-text">NEXUS<span>.</span>ULTRA</div>
+        </div>
+    </div>
+
+    <div class="cursor cursor-ring" aria-hidden="true"></div>
+    <div class="cursor cursor-dot" aria-hidden="true"></div>
+    <div class="toast-stack" id="toastStack" aria-live="polite" aria-atomic="true"></div>
+
+    <header class="header">
+        <div class="nav-container">
+            <a href="#home" class="logo" aria-label="Nexus Ultra">
+                NEXUS<span>.</span>ULTRA
+            </a>
+
+            <nav class="nav-links" aria-label="Основная навигация">
+                <a href="#home" class="active">Главная</a>
+                <a href="#cabinet">Кабинет</a>
+                <a href="#cards">Наши карты</a>
+                <a href="#support">Поддержка</a>
+                <a href="#settings">Настройки</a>
+            </nav>
+
+            <div class="nav-actions">
+                <button id="themeToggle" class="theme-btn magnetic" type="button" aria-label="Переключить тему" title="Переключить тему">☾</button>
+                <button id="cabinetButton" class="btn-text magnetic" type="button">Кабинет</button>
+                <button id="authAction" class="btn-text magnetic" type="button">Войти</button>
+                <button id="registerAction" class="btn-outline magnetic" type="button">Регистрация</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section reveal" id="home">
+            <div class="hero-grid">
+                <div class="hero-copy">
+                    <p class="eyebrow">Cyber-Stealth Private Banking</p>
+                    <h1>Банкинг за гранью <span>привычного</span></h1>
+                    <p class="hero-description">
+                        Управляйте капиталом в стиле Stealth. Никаких скрытых комиссий.
+                        Абсолютная приватность и ваш личный финансовый космос.
+                    </p>
+
+                    <div class="hero-actions">
+                        <button class="btn-neon magnetic" type="button" data-scroll-to="cards">Выбрать карту</button>
+                        <button class="btn-ghost magnetic" type="button" id="heroCabinetButton">Личный кабинет</button>
+                    </div>
+                </div>
+
+                <aside class="hero-panel premium-surface tilt-card reveal" data-tilt data-light>
+                    <div class="hero-panel__top">
+                        <div>
+                            <div class="mini-label">Private Ledger</div>
+                            <div class="mini-value">NUL-9025</div>
+                        </div>
+                        <div class="status-pill" id="cabinetStatusPill">GUEST</div>
+                    </div>
+
+                    <div class="hero-card">
+                        <div class="hero-card__brand">NEXUS</div>
+                        <div class="hero-card__chip"></div>
+                        <div class="hero-card__bottom">
+                            <div>
+                                <div class="mini-label">Баланс</div>
+                                <div class="hero-card__balance" id="heroBalance">₽ 1 250 000</div>
+                            </div>
+                            <div class="hero-card__network">ULTRA</div>
+                        </div>
+                    </div>
+
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <span>0.0%</span>
+                            <p>скрытых комиссий</p>
+                        </div>
+                        <div class="hero-stat">
+                            <span>15%</span>
+                            <p>по копилкам</p>
+                        </div>
+                        <div class="hero-stat">
+                            <span id="heroOrdersCount">0</span>
+                            <p>карт заказано</p>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <section class="cabinet-section reveal" id="cabinet">
+            <h2 class="section-title">Личный <span>кабинет</span></h2>
+
+            <div class="cabinet-grid">
+                <article class="cabinet-summary premium-surface tilt-card reveal" data-tilt data-light>
+                    <div class="cabinet-summary__row">
+                        <div>
+                            <div class="mini-label">Статус доступа</div>
+                            <div class="cabinet-status" id="cabinetAuthStatus">Гость</div>
+                        </div>
+                        <div class="status-pill" id="cabinetBadge">OFFLINE</div>
+                    </div>
+
+                    <div class="cabinet-balance">
+                        <div class="mini-label">Текущий баланс</div>
+                        <div class="cabinet-balance__value" id="cabinetBalance">₽ 1 250 000</div>
+                    </div>
+
+                    <div class="cabinet-metrics">
+                        <div class="cabinet-metric">
+                            <span id="cabinetOrdersCount">0</span>
+                            <p>карт заказано</p>
+                        </div>
+                        <div class="cabinet-metric">
+                            <span id="cabinetThemeLabel">Dark</span>
+                            <p>текущая тема</p>
+                        </div>
+                    </div>
+
+                    <button id="cabinetAction" class="btn-neon magnetic w-100" type="button">Войти в кабинет</button>
+                </article>
+
+                <article class="cabinet-orders premium-surface tilt-card reveal" data-tilt data-light>
+                    <div class="cabinet-orders__top">
+                        <h3>Активные карты</h3>
+                        <span class="mini-label">Saved in browser</span>
+                    </div>
+
+                    <div id="orderedCardsList" class="ordered-list">
+                        <div class="ordered-empty">
+                            Пока ничего не заказано. Выберите карту в следующем блоке.
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="cards-section reveal" id="cards">
+            <h2 class="section-title">Наши <span>карты</span></h2>
+
+            <div class="cards-grid cards-grid--bank">
+                <article class="bank-card premium-surface tilt-card reveal" data-tilt data-light data-card-id="ultra-black-premium" data-price="50000">
+                    <div class="bank-card__top">
+                        <div>
+                            <div class="mini-label">Ultra Collection</div>
+                            <h3>Ultra Black Premium</h3>
+                        </div>
+                        <div class="price-tag">50 000 ₽ / год</div>
+                    </div>
+
+                    <div class="bank-card__body bank-card__body--qr">
+                        <div class="bank-card__content">
+                            <p>
+                                Эксклюзивные привилегии, доступ в бизнес-залы, персональный сервис
+                                и строгий премиальный статус.
+                            </p>
+
+                            <ul class="card-benefits">
+                                <li>Доступ в бизнес-залы</li>
+                                <li>Эксклюзивные лимиты</li>
+                                <li>Металлический премиум-класс</li>
+                            </ul>
+                        </div>
+
+                        <div class="bank-card__qr">
+                            <div class="qr-caption">Static QR</div>
+                            <svg class="qr-svg" viewBox="0 0 120 120" aria-hidden="true">
+                                <rect width="120" height="120" rx="16" fill="rgba(255,255,255,0.03)"/>
+                                <rect x="14" y="14" width="28" height="28" rx="4" fill="none" stroke="currentColor" stroke-width="6"/>
+                                <rect x="78" y="14" width="28" height="28" rx="4" fill="none" stroke="currentColor" stroke-width="6"/>
+                                <rect x="14" y="78" width="28" height="28" rx="4" fill="none" stroke="currentColor" stroke-width="6"/>
+
+                                <rect x="50" y="18" width="8" height="8" fill="currentColor"/>
+                                <rect x="62" y="18" width="8" height="8" fill="currentColor"/>
+                                <rect x="50" y="30" width="8" height="8" fill="currentColor"/>
+                                <rect x="66" y="30" width="8" height="8" fill="currentColor"/>
+                                <rect x="50" y="42" width="8" height="8" fill="currentColor"/>
+
+                                <rect x="50" y="58" width="8" height="8" fill="currentColor"/>
+                                <rect x="62" y="58" width="8" height="8" fill="currentColor"/>
+                                <rect x="74" y="58" width="8" height="8" fill="currentColor"/>
+                                <rect x="50" y="70" width="8" height="8" fill="currentColor"/>
+                                <rect x="62" y="70" width="8" height="8" fill="currentColor"/>
+                                <rect x="86" y="70" width="8" height="8" fill="currentColor"/>
+                                <rect x="38" y="82" width="8" height="8" fill="currentColor"/>
+                                <rect x="50" y="82" width="8" height="8" fill="currentColor"/>
+                                <rect x="74" y="82" width="8" height="8" fill="currentColor"/>
+                                <rect x="86" y="82" width="8" height="8" fill="currentColor"/>
+                                <rect x="38" y="94" width="8" height="8" fill="currentColor"/>
+                                <rect x="62" y="94" width="8" height="8" fill="currentColor"/>
+                                <rect x="74" y="94" width="8" height="8" fill="currentColor"/>
+                                <rect x="98" y="94" width="8" height="8" fill="currentColor"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="bank-card__footer">
+                        <div class="bank-card__footer-info">
+                            <span class="mini-label">Стоимость годового обслуживания</span>
+                            <strong>Премиальный доступ</strong>
+                        </div>
+                        <button class="btn-outline magnetic order-card-btn" type="button">Заказать</button>
+                    </div>
+                </article>
+
+                <article class="bank-card premium-surface tilt-card reveal" data-tilt data-light data-card-id="nexus-youth" data-price="0">
+                    <div class="bank-card__top">
+                        <div>
+                            <div class="mini-label">Youth Edition</div>
+                            <h3>Nexus Youth</h3>
+                        </div>
+                        <div class="price-tag">0 ₽ обслуживание</div>
+                    </div>
+
+                    <div class="bank-card__body">
+                        <p>
+                            Молодёжная карта с кэшбэком на игры, еду и цифровые сервисы.
+                            Лёгкий вход в экосистему Nexus Ultra без годовой платы.
+                        </p>
+
+                        <ul class="card-benefits">
+                            <li>0 ₽ обслуживание</li>
+                            <li>Кэшбэк на игры</li>
+                            <li>Кэшбэк на еду</li>
+                        </ul>
+                    </div>
+
+                    <div class="bank-card__footer">
+                        <div class="bank-card__footer-info">
+                            <span class="mini-label">Для молодых клиентов</span>
+                            <strong>Технологичный старт</strong>
+                        </div>
+                        <button class="btn-outline magnetic order-card-btn" type="button">Заказать</button>
+                    </div>
+                </article>
+
+                <article class="bank-card premium-surface tilt-card reveal" data-tilt data-light data-card-id="nexus-giga-gold" data-price="15000">
+                    <div class="bank-card__top">
+                        <div>
+                            <div class="mini-label">Gold Tier</div>
+                            <h3>Nexus Giga Gold</h3>
+                        </div>
+                        <div class="price-tag">15 000 ₽ / год</div>
+                    </div>
+
+                    <div class="bank-card__body">
+                        <p>
+                            Персональный менеджер, гигантские бонусы, расширенные лимиты
+                            и уверенный Premium-статус в одном продукте.
+                        </p>
+
+                        <ul class="card-benefits">
+                            <li>Персональный менеджер</li>
+                            <li>Гигантские бонусы</li>
+                            <li>Premium-статус</li>
+                        </ul>
+                    </div>
+
+                    <div class="bank-card__footer">
+                        <div class="bank-card__footer-info">
+                            <span class="mini-label">Доступный premium</span>
+                            <strong>Gold+ экосистема</strong>
+                        </div>
+                        <button class="btn-outline magnetic order-card-btn" type="button">Заказать</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="reviews-section reveal">
+            <h2 class="section-title">Отзывы <span>клиентов</span></h2>
+
+            <div class="cards-grid">
+                <article class="review-card premium-surface tilt-card reveal" data-tilt data-light>
+                    <p class="review-text">«Лучший цифровой банк, которым я пользовался. Интерфейс дорогой, быстрый и очень чистый.»</p>
+                    <p class="review-author">— Алекс В.</p>
+                </article>
+
+                <article class="review-card premium-surface tilt-card reveal" data-tilt data-light>
+                    <p class="review-text">«Наконец-то платформа, где ощущается статус. Дизайн и логика на уровне сильного финтех-продукта.»</p>
+                    <p class="review-author">— Елена С.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="faq-section reveal" id="support">
+            <h2 class="section-title">Частые <span>вопросы</span></h2>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question magnetic" type="button" aria-expanded="false">
+                        Как открыть личный кабинет?
+                    </button>
+                    <div class="faq-answer">
+                        <p>Нажмите «Кабинет» или «Войти» в шапке. Если вы не авторизованы, откроется модальное окно входа, после чего кабинет станет доступен.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question magnetic" type="button" aria-expanded="false">
+                        Что происходит после заказа карты?
+                    </button>
+                    <div class="faq-answer">
+                        <p>Статус карты мгновенно обновляется, стоимость списывается с баланса и состояние сохраняется в браузере через localStorage.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question magnetic" type="button" aria-expanded="false">
+                        Комиссии и скрытые списания есть?
+                    </button>
+                    <div class="faq-answer">
+                        <p>Нет скрытых комиссий. Система показывает понятную стоимость услуг и сохраняет прозрачную логику расходов.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question magnetic" type="button" aria-expanded="false">
+                        Работает ли сайт на телефоне?
+                    </button>
+                    <div class="faq-answer">
+                        <p>Да. Интерфейс адаптирован под iPhone и Android, а навигация на мобильных устройствах вынесена в нижний таб-бар.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question magnetic" type="button" aria-expanded="false">
+                        Данные сохраняются после обновления страницы?
+                    </button>
+                    <div class="faq-answer">
+                        <p>Да. Авторизация, баланс и список заказанных карт сохраняются в localStorage и восстанавливаются автоматически.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer reveal" id="settings">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="logo">NEXUS<span>.</span>ULTRA</div>
+                <p class="copyright">© 2026</p>
+            </div>
+
+            <div class="footer-links" aria-label="Ссылки на документы">
+                <a href="#">Лицензии</a>
+                <a href="#">Политика</a>
+                <a href="#">Контакты</a>
+            </div>
+
+            <div class="footer-social">
+                <a href="#" aria-label="Telegram">Telegram</a>
+            </div>
+        </div>
+    </footer>
+
+    <nav class="mobile-tabbar" aria-label="Нижняя навигация">
+        <button type="button" class="mobile-tabbar__item" data-scroll-to="home">
+            <span>⌂</span>
+            <small>Главная</small>
+        </button>
+        <button type="button" class="mobile-tabbar__item" data-scroll-to="cards">
+            <span>◫</span>
+            <small>Карты</small>
+        </button>
+        <button type="button" class="mobile-tabbar__item" id="mobileCabinetButton">
+            <span>◉</span>
+            <small>Кабинет</small>
+        </button>
+        <button type="button" class="mobile-tabbar__item" data-scroll-to="support">
+            <span>?</span>
+            <small>FAQ</small>
+        </button>
+    </nav>
+
+    <div class="modal" id="authModal" aria-hidden="true">
+        <div class="modal-content premium-surface" data-light>
+            <div class="modal-header">
+                <h3 class="modal-title">NEXUS<span>.</span>ULTRA</h3>
+                <button class="close-btn magnetic" id="closeModal" type="button" aria-label="Закрыть">×</button>
+            </div>
+
+            <div class="auth-toggle">
+                <button id="loginTab" class="toggle-btn magnetic active" type="button">Вход</button>
+                <button id="registerTab" class="toggle-btn magnetic" type="button">Регистрация</button>
+            </div>
+
+            <form id="loginForm" class="auth-form active" novalidate>
+                <div class="input-group">
+                    <input class="auth-input" type="text" placeholder="ID пользователя" autocomplete="off" required>
+                </div>
+                <div class="input-group">
+                    <input class="auth-input" type="password" placeholder="Пароль" autocomplete="off" required>
+                </div>
+                <button class="btn-neon magnetic w-100" type="submit">Войти в систему</button>
+            </form>
+
+            <form id="registerForm" class="auth-form" novalidate>
+                <div class="input-group">
+                    <input class="auth-input" type="text" placeholder="Ваше имя" autocomplete="off" required>
+                </div>
+                <div class="input-group">
+                    <input class="auth-input" type="email" placeholder="Электронная почта" autocomplete="off" required>
+                </div>
+                <div class="input-group">
+                    <input class="auth-input" type="password" placeholder="Придумайте пароль" autocomplete="off" required>
+                </div>
+                <button class="btn-neon magnetic w-100" type="submit">Создать аккаунт</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
